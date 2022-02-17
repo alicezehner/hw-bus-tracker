@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Bus Stops - Route 4</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+  body { margin: 0; padding: 0; }
+  #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+.map-overlay {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+}
+ 
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="map-overlay top">
+  <button style="font-size: 2em" onclick="move()">
+    Show Route #4
+  </button>
+</div>
+ 
+<script>
+  // api token
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic29mdGV4cGVyaW1lbnQiLCJhIjoiY2tjMngyZm9rMDFvajJzczJ3aWo0bnh6aiJ9.Bc_qK9Xf8SFBXkFM_x2gpg';
+
+  // map instance
+  var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-71.031996, 42.345192],
+      zoom: 13
+  });
+
+  // map marker
+  var marker = new mapboxgl.Marker()
+      .setLngLat([-71.031996, 42.345192])
+      .addTo(map);
+
+  var counter = 0;
+
+  const busStops = [
+      [-71.031996, 42.345192],
+      [-71.034878, 42.346538],
+      [-71.042116, 42.350241],
+      [-71.047419, 42.352775],
+      [-71.053278, 42.354588],
+      [-71.054079, 42.355395],
+      [-71.056251, 42.357495],
+      [-71.056733, 42.358789],
+      [-71.057129, 42.360387],
+      [-71.057724, 42.361847],
+      [-71.062198, 42.364737]
+  ];
+
+  // animate marker
+  function move(){
+    setTimeout(() => {
+      if (counter >= busStops.length) return;
+      marker.setLngLat(busStops[counter]);
+      counter++;
+      move();
+    }, 1000);
+  }
+</script>
+ 
+</body>
+</html>
